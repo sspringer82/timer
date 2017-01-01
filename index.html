@@ -10,7 +10,23 @@
 
         <div id="container">
             <canvas id="timer" height="400" width="400"></canvas>
-            <div id="display"></div>
+            <div id="display">
+                <div>
+                    <div data-modify-time='{"type": "hours", "direction": "up"}'>∧</div>
+                    <div id="hoursValue"></div>
+                    <div data-modify-time='{"type": "hours", "direction": "down"}'>∨</div>
+                </div>
+                <div>
+                    <div data-modify-time='{"type": "minutes", "direction": "up"}'>∧</div>
+                    <div id="minutesValue"></div>
+                    <div data-modify-time='{"type": "minute", "direction": "down"}'>∨</div>
+                </div>
+                <div>
+                    <div data-modify-time='{"type": "seconds", "direction": "up"}'>∧</div>
+                    <div id="secondsValue"></div>
+                    <div data-modify-time='{"type": "seconds", "direction": "down"}'>∨</div>
+                </div>
+            </div>
             <div id="controls">
                 <button id="start">start</button>
                 <button id="pause">pause</button>
