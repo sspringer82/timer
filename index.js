@@ -80,9 +80,20 @@ class Timer {
         const mm = Math.floor((this.currentTime - hh * 3600) / 60);
         const ss = Math.floor(this.currentTime - hh * 3600 - mm * 60);
 
-        this.hoursDisplay.innerHTML = this.padLeft(hh);
-        this.minutesDisplay.innerHTML = this.padLeft(mm);
-        this.secondsDisplay.innerHTML = this.padLeft(ss);
+        const el = document.getElementById('numbers');
+        const context = el.getContext('2d');
+
+        context.clearRect(0, 0, 200, 200);
+
+        const time = '' + this.padLeft(hh) + this.padLeft(mm) + this.padLeft(ss);
+
+        const number = new Numbers(context);
+        number.drawNumber(shapes[time[0]], 10.5, 10.5);
+        number.drawNumber(shapes[time[1]], 28.5, 10.5);
+        number.drawNumber(shapes[time[2]], 46.5, 10.5);
+        number.drawNumber(shapes[time[3]], 64.5, 10.5);
+        number.drawNumber(shapes[time[4]], 82.5, 10.5);
+        number.drawNumber(shapes[time[5]], 100.5, 10.5);
     }
 
     padLeft(value) {
@@ -125,6 +136,6 @@ class Timer {
 
 document.onreadystatechange = () => {
   if (document.readyState === 'complete') {
-    (new Timer(0, 0, 0)).init();
+    (new Timer(0, 2, 0)).init();
   }
 };
