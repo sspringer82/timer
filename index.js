@@ -88,12 +88,17 @@ class Timer {
         const time = '' + this.padLeft(hh) + this.padLeft(mm) + this.padLeft(ss);
 
         const number = new Numbers(context);
+        context.fillStyle = number.color;
         number.drawNumber(shapes[time[0]], 10.5, 10.5);
         number.drawNumber(shapes[time[1]], 28.5, 10.5);
-        number.drawNumber(shapes[time[2]], 46.5, 10.5);
-        number.drawNumber(shapes[time[3]], 64.5, 10.5);
-        number.drawNumber(shapes[time[4]], 82.5, 10.5);
-        number.drawNumber(shapes[time[5]], 100.5, 10.5);
+        context.fillRect(45.5, 17.5, 2, 2);
+        context.fillRect(45.5, 25.5, 2, 2);
+        number.drawNumber(shapes[time[2]], 51.5, 10.5);
+        number.drawNumber(shapes[time[3]], 69.5, 10.5);
+        context.fillRect(86.5, 17.5, 2, 2);
+        context.fillRect(86.5, 25.5, 2, 2);
+        number.drawNumber(shapes[time[4]], 92.5, 10.5);
+        number.drawNumber(shapes[time[5]], 110.5, 10.5);
     }
 
     padLeft(value) {

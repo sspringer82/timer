@@ -12,13 +12,20 @@
 
 #display {
     position: absolute;
-    top: 200px;
+    top: 160px;
     text-align: center;
     z-index: 10;
     width: 100%;
     margin: 0 auto;
-    display: flex;
     justify-content: center;
+}
+
+#minutesUp, #minutesDown {
+    margin: 0 10px;
+}
+
+#numbers {
+    background-color: black;
 }
 
 #controls {
