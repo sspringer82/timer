@@ -50,6 +50,9 @@ class Timer {
         }
         if (modify.direction === 'down') {
             value *= -1;
+            if (this.time + value < 0 || this.currentTime + value < 0) {
+                return;
+            }
         }
         this.time += value;
         this.currentTime += value;
