@@ -1,6 +1,7 @@
 class Timer {
 
     constructor(hh, mm, ss) {
+        this.sound = new Audio('./assets/foghorn-daniel_simon.mp3');
         this.interval;
         this.animate = false;
 
@@ -115,7 +116,8 @@ class Timer {
         this.toggleControls('hidden');
         this.interval = setInterval(() => {
             if (this.currentTime <= 0) {
-                clearInterval(this.interval);
+                this.pause();
+                this.sound.play();
                 return;
             }
             this.currentTime -= 1;
