@@ -31,6 +31,7 @@ class Timer {
 
     this.showTime();
     this.drawCircle();
+    // this.drawControls();
   }
 
   modifyTime(event) {
@@ -75,7 +76,37 @@ class Timer {
       Math.PI / 180 * (start + angle),
     );
     this.ctx.lineWidth = 10;
+    this.ctx.strokeStyle = '#40ff00';
     this.ctx.stroke();
+  }
+
+  startControl(x, y, height, width) {
+    this.ctx.beginPath();
+    //this.ctx.lineWidth = 1;
+    this.ctx.fillStyle = '#40ff00';
+    this.ctx.moveTo(x, y);
+    this.ctx.lineTo(x + width, y + height / 2);
+    this.ctx.lineTo(x, y + height);
+    this.ctx.lineTo(x, y);
+    this.ctx.fill();
+  }
+
+  drawControls() {
+    // start
+    this.startControl(132, 300, 40, 35);
+    // stop
+
+    // reset
+
+    /*this.ctx.beginPath();
+    this.ctx.moveTo(100, 300);
+    this.ctx.lineWidth = 1;
+    this.ctx.strokeStyle = '#40ff00';
+    this.ctx.lineTo(300, 300);
+    this.ctx.lineTo(300, 340);
+    this.ctx.lineTo(100, 340);
+    this.ctx.lineTo(100, 300);
+    this.ctx.stroke();*/
   }
 
   showTime() {
@@ -125,7 +156,10 @@ class Timer {
       this.currentTime -= 1;
       this.showTime();
       this.animate = true;
-      requestAnimationFrame(this.drawCircle.bind(this));
+      requestAnimationFrame(() => {
+        this.drawCircle();
+        this.drawControls();
+      });
     }, 1000);
   }
 
