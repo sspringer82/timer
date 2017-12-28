@@ -1,38 +1,40 @@
 #timer {
-    position: absolute;
-    z-index: 10;
+  position: absolute;
+  z-index: 10;
+  background-color: black;
 }
 
 #container {
-    position: relative;
-    height: 400px;
-    width: 400px;
-    margin: 0 auto;    
+  position: relative;
+  height: 400px;
+  width: 400px;
+  margin: 0 auto;
 }
 
 #display {
-    position: absolute;
-    top: 160px;
-    text-align: center;
-    z-index: 10;
-    width: 100%;
-    margin: 0 auto;
-    justify-content: center;
+  position: absolute;
+  top: 160px;
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: center;
 }
 
-#minutesUp, #minutesDown {
-    margin: 0 10px;
+#minutesUp,
+#minutesDown {
+  margin: 0 10px;
 }
 
 #numbers {
-    background-color: black;
-    margin-top: 4px;
+  background-color: black;
+  margin-top: 4px;
 }
 
 #controls {
-    position: absolute;
-    top: 270px;
-    text-align: center;
-    width: 100%;
-    z-index: 20;
+  position: absolute;
+  top: 270px;
+  text-align: center;
+  width: 100%;
+  z-index: 20;
 }
