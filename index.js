@@ -18,24 +18,10 @@ class Timer {
     this.time = hh * 3600 + mm * 60 + ss;
     this.currentTime = this.time;
 
-    this.startControl = {
-      x: 132,
-      y: 300,
-      height: 40,
-      width: 35,
-    };
-    this.stopControl = {
-      x: 132,
-      y: 300,
-      height: 40,
-      width: 35,
-    };
-    this.resetControl = {
-      x: 232,
-      y: 300,
-      height: 40,
-      width: 40,
-    };
+    this.startControl = new StartControl(this.ctx, 132, 300, 40, 35);
+    this.stopControl = new StopControl(this.ctx, 132, 300, 40, 35);
+
+    this.resetControl = new ResetControl(this.ctx, 232, 300, 40, 40);
   }
 
   init() {
@@ -112,66 +98,13 @@ class Timer {
     this.ctx.stroke();
   }
 
-  drawStartControl(x, y, height, width) {
-    this.ctx.beginPath();
-    this.ctx.fillStyle = '#40ff00';
-    this.ctx.moveTo(x, y);
-    this.ctx.lineTo(x + width, y + height / 2);
-    this.ctx.lineTo(x, y + height);
-    this.ctx.lineTo(x, y);
-    this.ctx.fill();
-  }
-
-  drawStopControl(x, y, height, width) {
-    const innerWidth = Math.floor(width / 3);
-    this.ctx.beginPath();
-    this.ctx.fillStyle = '#40ff00';
-    this.ctx.moveTo(x, y);
-    this.ctx.lineTo(x + innerWidth, y);
-    this.ctx.lineTo(x + innerWidth, y + height);
-    this.ctx.lineTo(x, y + height);
-    this.ctx.lineTo(x, y);
-    this.ctx.fill();
-
-    this.ctx.moveTo(x + 2 * innerWidth, y);
-    this.ctx.lineTo(x + 2 * innerWidth + innerWidth, y);
-    this.ctx.lineTo(x + 2 * innerWidth + innerWidth, y + height);
-    this.ctx.lineTo(x + 2 * innerWidth, y + height);
-    this.ctx.lineTo(x + 2 * innerWidth, y);
-    this.ctx.fill();
-  }
-
-  drawResetControl(x, y, height, width) {
-    const temp = height / 2.25;
-    this.ctx.beginPath();
-    this.ctx.fillStyle = '#40ff00';
-    this.ctx.strokeStyle = '#40ff00';
-    this.ctx.lineWidth = 4;
-    const radius = height / 2 - temp / 2;
-    this.ctx.arc(
-      x + height / 2,
-      y + width / 2,
-      radius,
-      Math.PI + Math.PI / 2,
-      Math.PI,
-    );
-    this.ctx.stroke();
-
-    this.ctx.beginPath();
-    this.ctx.moveTo(x + width / 2, y);
-    this.ctx.lineTo(x + width / 2, y + temp);
-    this.ctx.lineTo(x + width / 2 - temp / 2, y + temp / 2);
-    this.ctx.lineTo(x + width / 2, y);
-    this.ctx.fill();
-  }
-
   drawControls() {
     if (this.animate) {
-      this.drawStopControl(132, 300, 40, 35);
+      this.stopControl.render();
     } else {
-      this.drawStartControl(132, 300, 40, 35);
+      this.startControl.render();
     }
-    this.drawResetControl(232, 300, 40, 40);
+    this.resetControl.render();
   }
 
   isClickWithin(e, element) {
