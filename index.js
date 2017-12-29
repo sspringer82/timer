@@ -1,3 +1,8 @@
+import { StartControl } from './shapes/start';
+import { StopControl } from './shapes/stop';
+import { ResetControl } from './shapes/reset';
+import { shapes, Numbers } from './numbers';
+
 class Timer {
   constructor(hh, mm, ss) {
     this.sound = new Audio('./assets/foghorn-daniel_simon.mp3');

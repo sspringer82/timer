@@ -1,4 +1,4 @@
-class Control {
+export class Control {
   constructor(ctx, x, y, height, width) {
     this.ctx = ctx;
     this.x = x;

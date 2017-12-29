@@ -1,4 +1,6 @@
-class StopControl extends Control {
+import { Control } from './control';
+
+export class StopControl extends Control {
   render() {
     const innerWidth = Math.floor(this.width / 3);
     this.ctx.beginPath();

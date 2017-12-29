@@ -1,4 +1,6 @@
-class ResetControl extends Control {
+import { Control } from './control';
+
+export class ResetControl extends Control {
   render() {
     const triangleHeight = this.height / 2.25;
     this.ctx.beginPath();

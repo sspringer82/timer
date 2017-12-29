@@ -1,4 +1,6 @@
-class StartControl extends Control {
+import { Control } from './control';
+
+export class StartControl extends Control {
   render() {
     this.ctx.beginPath();
     this.ctx.fillStyle = '#40ff00';
