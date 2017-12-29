@@ -5,9 +5,6 @@ class Timer {
     this.animate = false;
 
     this.displayEl = document.querySelector('#display');
-    this.startBtn = document.querySelector('#start');
-    this.pauseBtn = document.querySelector('#pause');
-    this.resetBtn = document.querySelector('#reset');
 
     this.container = document.querySelector('#container');
 
@@ -15,23 +12,58 @@ class Timer {
     this.minutesDisplay = document.querySelector('#minutesValue');
     this.secondsDisplay = document.querySelector('#secondsValue');
 
-    const canvas = document.querySelector('#timer');
-    this.ctx = canvas.getContext('2d');
+    this.canvas = document.querySelector('#timer');
+    this.ctx = this.canvas.getContext('2d');
 
     this.time = hh * 3600 + mm * 60 + ss;
     this.currentTime = this.time;
+
+    this.startControl = {
+      x: 132,
+      y: 300,
+      height: 40,
+      width: 35,
+    };
+    this.stopControl = {
+      x: 132,
+      y: 300,
+      height: 40,
+      width: 35,
+    };
+    this.resetControl = {
+      x: 232,
+      y: 300,
+      height: 40,
+      width: 40,
+    };
   }
 
   init() {
-    this.startBtn.onclick = this.start.bind(this);
-    this.pauseBtn.onclick = this.pause.bind(this);
-    this.resetBtn.onclick = this.reset.bind(this);
+    this.canvas.onclick = this.handleClick.bind(this);
 
     this.container.onclick = this.modifyTime.bind(this);
 
     this.showTime();
-    this.drawCircle();
-    // this.drawControls();
+    this.render();
+  }
+
+  handleClick(e) {
+    switch (true) {
+      case this.isClickWithin(e, this.startControl):
+        this.startStop();
+        break;
+      case this.isClickWithin(e, this.resetControl):
+        this.reset();
+        break;
+    }
+  }
+
+  startStop() {
+    if (this.animate) {
+      this.pause();
+    } else {
+      this.start();
+    }
   }
 
   modifyTime(event) {
@@ -80,9 +112,8 @@ class Timer {
     this.ctx.stroke();
   }
 
-  startControl(x, y, height, width) {
+  drawStartControl(x, y, height, width) {
     this.ctx.beginPath();
-    //this.ctx.lineWidth = 1;
     this.ctx.fillStyle = '#40ff00';
     this.ctx.moveTo(x, y);
     this.ctx.lineTo(x + width, y + height / 2);
@@ -91,22 +122,65 @@ class Timer {
     this.ctx.fill();
   }
 
-  drawControls() {
-    // start
-    this.startControl(132, 300, 40, 35);
-    // stop
+  drawStopControl(x, y, height, width) {
+    const innerWidth = Math.floor(width / 3);
+    this.ctx.beginPath();
+    this.ctx.fillStyle = '#40ff00';
+    this.ctx.moveTo(x, y);
+    this.ctx.lineTo(x + innerWidth, y);
+    this.ctx.lineTo(x + innerWidth, y + height);
+    this.ctx.lineTo(x, y + height);
+    this.ctx.lineTo(x, y);
+    this.ctx.fill();
 
-    // reset
+    this.ctx.moveTo(x + 2 * innerWidth, y);
+    this.ctx.lineTo(x + 2 * innerWidth + innerWidth, y);
+    this.ctx.lineTo(x + 2 * innerWidth + innerWidth, y + height);
+    this.ctx.lineTo(x + 2 * innerWidth, y + height);
+    this.ctx.lineTo(x + 2 * innerWidth, y);
+    this.ctx.fill();
+  }
 
-    /*this.ctx.beginPath();
-    this.ctx.moveTo(100, 300);
-    this.ctx.lineWidth = 1;
+  drawResetControl(x, y, height, width) {
+    const temp = height / 2.25;
+    this.ctx.beginPath();
+    this.ctx.fillStyle = '#40ff00';
     this.ctx.strokeStyle = '#40ff00';
-    this.ctx.lineTo(300, 300);
-    this.ctx.lineTo(300, 340);
-    this.ctx.lineTo(100, 340);
-    this.ctx.lineTo(100, 300);
-    this.ctx.stroke();*/
+    this.ctx.lineWidth = 4;
+    const radius = height / 2 - temp / 2;
+    this.ctx.arc(
+      x + height / 2,
+      y + width / 2,
+      radius,
+      Math.PI + Math.PI / 2,
+      Math.PI,
+    );
+    this.ctx.stroke();
+
+    this.ctx.beginPath();
+    this.ctx.moveTo(x + width / 2, y);
+    this.ctx.lineTo(x + width / 2, y + temp);
+    this.ctx.lineTo(x + width / 2 - temp / 2, y + temp / 2);
+    this.ctx.lineTo(x + width / 2, y);
+    this.ctx.fill();
+  }
+
+  drawControls() {
+    if (this.animate) {
+      this.drawStopControl(132, 300, 40, 35);
+    } else {
+      this.drawStartControl(132, 300, 40, 35);
+    }
+    this.drawResetControl(232, 300, 40, 40);
+  }
+
+  isClickWithin(e, element) {
+    return (
+      e.offsetX >= element.x &&
+      e.offsetX <= element.x + element.width &&
+      e.offsetY >= element.y &&
+      e.offsetY <= element.y + element.height
+    );
   }
 
   showTime() {
@@ -157,8 +231,7 @@ class Timer {
       this.showTime();
       this.animate = true;
       requestAnimationFrame(() => {
-        this.drawCircle();
-        this.drawControls();
+        this.render();
       });
     }, 1000);
   }
@@ -167,13 +240,19 @@ class Timer {
     this.animate = false;
     this.toggleControls('visible');
     clearInterval(this.interval);
+    this.render();
   }
 
   reset() {
     this.pause();
     this.currentTime = this.time;
     this.showTime();
+    this.render();
+  }
+
+  render() {
     this.drawCircle();
+    this.drawControls();
   }
 }
 
