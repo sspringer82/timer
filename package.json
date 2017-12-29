@@ -1,0 +1,22 @@
+{
+  "name": "timer",
+  "version": "0.0.1",
+  "description": "Simple timer application",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sspringer82/timer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sspringer82/timer/issues"
+  },
+  "homepage": "https://github.com/sspringer82/timer#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.3.1"
+  }
+}
