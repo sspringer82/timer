@@ -1,12 +1,4 @@
-class StartControl {
-  constructor(ctx, x, y, height, width) {
-    this.ctx = ctx;
-    this.x = x;
-    this.y = y;
-    this.height = height;
-    this.width = width;
-  }
-
+class StartControl extends Control {
   render() {
     this.ctx.beginPath();
     this.ctx.fillStyle = '#40ff00';

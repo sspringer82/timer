@@ -35,10 +35,10 @@ class Timer {
 
   handleClick(e) {
     switch (true) {
-      case this.isClickWithin(e, this.startControl):
+      case this.startControl.isClickWithin(e):
         this.startStop();
         break;
-      case this.isClickWithin(e, this.resetControl):
+      case this.resetControl.isClickWithin(e):
         this.reset();
         break;
     }
@@ -105,15 +105,6 @@ class Timer {
       this.startControl.render();
     }
     this.resetControl.render();
-  }
-
-  isClickWithin(e, element) {
-    return (
-      e.offsetX >= element.x &&
-      e.offsetX <= element.x + element.width &&
-      e.offsetY >= element.y &&
-      e.offsetY <= element.y + element.height
-    );
   }
 
   showTime() {

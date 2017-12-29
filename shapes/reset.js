@@ -1,12 +1,4 @@
-class ResetControl {
-  constructor(ctx, x, y, height, width) {
-    this.ctx = ctx;
-    this.x = x;
-    this.y = y;
-    this.height = height;
-    this.width = width;
-  }
-
+class ResetControl extends Control {
   render() {
     const triangleHeight = this.height / 2.25;
     this.ctx.beginPath();

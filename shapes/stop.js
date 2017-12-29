@@ -1,12 +1,4 @@
-class StopControl {
-  constructor(ctx, x, y, height, width) {
-    this.ctx = ctx;
-    this.x = x;
-    this.y = y;
-    this.height = height;
-    this.width = width;
-  }
-
+class StopControl extends Control {
   render() {
     const innerWidth = Math.floor(this.width / 3);
     this.ctx.beginPath();
