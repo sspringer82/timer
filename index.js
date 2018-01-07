@@ -1,6 +1,8 @@
 import { StartControl } from './shapes/start';
 import { StopControl } from './shapes/stop';
 import { ResetControl } from './shapes/reset';
+import { UpArrow } from './shapes/up-arrow';
+import { DownArrow } from './shapes/down-arrow';
 import { shapes, Numbers } from './numbers';
 
 class Timer {
@@ -25,8 +27,13 @@ class Timer {
 
     this.startControl = new StartControl(this.ctx, 132, 300, 40, 35);
     this.stopControl = new StopControl(this.ctx, 132, 300, 40, 35);
-
     this.resetControl = new ResetControl(this.ctx, 232, 300, 40, 40);
+    this.increaseHours = new UpArrow(this.ctx, 146, 165, 10, 20);
+    this.increaseMinutes = new UpArrow(this.ctx, 186, 165, 10, 20);
+    this.increaseSeconds = new UpArrow(this.ctx, 227, 165, 10, 20);
+    this.decreaseHours = new DownArrow(this.ctx, 146, 235, 10, 20);
+    this.decreaseMinutes = new DownArrow(this.ctx, 186, 235, 10, 20);
+    this.decreaseSeconds = new DownArrow(this.ctx, 227, 235, 10, 20);
   }
 
   init() {
@@ -110,6 +117,14 @@ class Timer {
       this.startControl.render();
     }
     this.resetControl.render();
+
+    this.increaseHours.render();
+    this.increaseMinutes.render();
+    this.increaseSeconds.render();
+
+    this.decreaseHours.render();
+    this.decreaseMinutes.render();
+    this.decreaseSeconds.render();
   }
 
   showTime() {
