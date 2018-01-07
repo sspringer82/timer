@@ -38,9 +38,6 @@ class Timer {
 
   init() {
     this.canvas.onclick = this.handleClick.bind(this);
-
-    this.container.onclick = this.modifyTime.bind(this);
-
     this.showTime();
     this.render();
   }
@@ -53,6 +50,24 @@ class Timer {
       case this.resetControl.isClickWithin(e):
         this.reset();
         break;
+      case this.increaseHours.isClickWithin(e):
+        this.modifyTime(3600);
+        break;
+      case this.increaseMinutes.isClickWithin(e):
+        this.modifyTime(60);
+        break;
+      case this.increaseSeconds.isClickWithin(e):
+        this.modifyTime(1);
+        break;
+      case this.decreaseHours.isClickWithin(e):
+        this.modifyTime(-3600);
+        break;
+      case this.decreaseMinutes.isClickWithin(e):
+        this.modifyTime(-60);
+        break;
+      case this.decreaseSeconds.isClickWithin(e):
+        this.modifyTime(-1);
+        break;
     }
   }
 
@@ -64,28 +79,12 @@ class Timer {
     }
   }
 
-  modifyTime(event) {
-    const modify = JSON.parse(event.target.getAttribute('data-modify-time'));
-    if (modify === null) {
+  modifyTime(seconds) {
+    if (this.time + seconds < 0 || this.currentTime + seconds < 0) {
       return;
     }
-    let value = 1;
-    switch (modify.type) {
-      case 'hours':
-        value = 3600;
-        break;
-      case 'minutes':
-        value = 60;
-        break;
-    }
-    if (modify.direction === 'down') {
-      value *= -1;
-      if (this.time + value < 0 || this.currentTime + value < 0) {
-        return;
-      }
-    }
-    this.time += value;
-    this.currentTime += value;
+    this.time += seconds;
+    this.currentTime += seconds;
     this.showTime();
   }
 
