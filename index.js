@@ -117,13 +117,15 @@ class Timer {
     }
     this.resetControl.render();
 
-    this.increaseHours.render();
-    this.increaseMinutes.render();
-    this.increaseSeconds.render();
+    if (!this.animate) {
+      this.increaseHours.render();
+      this.increaseMinutes.render();
+      this.increaseSeconds.render();
 
-    this.decreaseHours.render();
-    this.decreaseMinutes.render();
-    this.decreaseSeconds.render();
+      this.decreaseHours.render();
+      this.decreaseMinutes.render();
+      this.decreaseSeconds.render();
+    }
   }
 
   showTime() {
