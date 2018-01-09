@@ -11,14 +11,6 @@ class Timer {
     this.interval;
     this.animate = false;
 
-    this.displayEl = document.querySelector('#display');
-
-    this.container = document.querySelector('#container');
-
-    this.hoursDisplay = document.querySelector('#hoursValue');
-    this.minutesDisplay = document.querySelector('#minutesValue');
-    this.secondsDisplay = document.querySelector('#secondsValue');
-
     this.canvas = document.querySelector('#timer');
     this.ctx = this.canvas.getContext('2d');
 
@@ -164,6 +156,7 @@ class Timer {
     });
   }
 
+  // @todo start immediately not a second delayed
   start() {
     this.toggleControls('hidden');
     this.interval = setInterval(() => {
