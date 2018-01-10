@@ -148,15 +148,8 @@ class Timer {
     return parseInt(value) < 10 ? '0' + value : value;
   }
 
-  toggleControls(visibility) {
-    document.querySelectorAll('[data-modify-time]').forEach(el => {
-      el.style.visibility = visibility;
-    });
-  }
-
   // @todo start immediately not a second delayed
   start() {
-    this.toggleControls('hidden');
     this.interval = setInterval(() => {
       if (this.currentTime <= 0) {
         this.pause();
@@ -173,7 +166,6 @@ class Timer {
 
   pause() {
     this.animate = false;
-    this.toggleControls('visible');
     clearInterval(this.interval);
     this.render();
   }
