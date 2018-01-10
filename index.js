@@ -125,25 +125,23 @@ class Timer {
     const mm = Math.floor((this.currentTime - hh * 3600) / 60);
     const ss = Math.floor(this.currentTime - hh * 3600 - mm * 60);
 
-    const el = document.getElementById('numbers');
-    const context = el.getContext('2d');
-
-    context.clearRect(0, 0, 200, 200);
-
     const time = '' + this.padLeft(hh) + this.padLeft(mm) + this.padLeft(ss);
 
-    const number = new Numbers(context);
-    context.fillStyle = number.color;
-    number.drawNumber(shapes[time[0]], 10.5, 10.5);
-    number.drawNumber(shapes[time[1]], 28.5, 10.5);
-    context.fillRect(45.5, 17.5, 2, 2);
-    context.fillRect(45.5, 25.5, 2, 2);
-    number.drawNumber(shapes[time[2]], 51.5, 10.5);
-    number.drawNumber(shapes[time[3]], 69.5, 10.5);
-    context.fillRect(86.5, 17.5, 2, 2);
-    context.fillRect(86.5, 25.5, 2, 2);
-    number.drawNumber(shapes[time[4]], 92.5, 10.5);
-    number.drawNumber(shapes[time[5]], 110.5, 10.5);
+    const number = new Numbers(this.ctx);
+    this.ctx.fillStyle = number.color;
+    const x = 132;
+    const y = 184;
+    this.ctx.clearRect(x, y, 130, 40);
+    number.drawNumber(shapes[time[0]], x + 10.5, y + 10.5);
+    number.drawNumber(shapes[time[1]], x + 28.5, y + 10.5);
+    this.ctx.fillRect(x + 45.5, y + 17.5, 2, 2);
+    this.ctx.fillRect(x + 45.5, y + 25.5, 2, 2);
+    number.drawNumber(shapes[time[2]], x + 51.5, y + 10.5);
+    number.drawNumber(shapes[time[3]], x + 69.5, y + 10.5);
+    this.ctx.fillRect(x + 86.5, y + 17.5, 2, 2);
+    this.ctx.fillRect(x + 86.5, y + 25.5, 2, 2);
+    number.drawNumber(shapes[time[4]], x + 92.5, y + 10.5);
+    number.drawNumber(shapes[time[5]], x + 110.5, y + 10.5);
   }
 
   padLeft(value) {
@@ -166,7 +164,6 @@ class Timer {
         return;
       }
       this.currentTime -= 1;
-      this.showTime();
       this.animate = true;
       requestAnimationFrame(() => {
         this.render();
@@ -190,6 +187,7 @@ class Timer {
 
   render() {
     this.drawCircle();
+    this.showTime();
     this.drawControls();
   }
 }
