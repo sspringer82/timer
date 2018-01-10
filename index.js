@@ -148,20 +148,22 @@ class Timer {
     return parseInt(value) < 10 ? '0' + value : value;
   }
 
-  // @todo start immediately not a second delayed
   start() {
-    this.interval = setInterval(() => {
-      if (this.currentTime <= 0) {
-        this.pause();
-        this.sound.play();
-        return;
-      }
-      this.currentTime -= 1;
-      this.animate = true;
-      requestAnimationFrame(() => {
-        this.render();
-      });
-    }, 1000);
+    this.clockTick();
+    this.interval = setInterval(() => this.clockTick(), 1000);
+  }
+
+  clockTick() {
+    if (this.currentTime <= 0) {
+      this.pause();
+      this.sound.play();
+      return;
+    }
+    this.currentTime -= 1;
+    this.animate = true;
+    requestAnimationFrame(() => {
+      this.render();
+    });
   }
 
   pause() {
