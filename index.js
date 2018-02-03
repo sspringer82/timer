@@ -160,7 +160,7 @@ class Timer {
   clockTick() {
     if (this.currentTime <= 0) {
       this.pause();
-      //this.sound.play();
+      this.sound.play();
       this.trigger('finish');
       return;
     }
