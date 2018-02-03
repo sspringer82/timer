@@ -4,7 +4,7 @@ import { ResetControl } from './shapes/reset';
 import { UpArrow } from './shapes/up-arrow';
 import { DownArrow } from './shapes/down-arrow';
 import { shapes, Numbers } from './numbers';
-import { TimerNotification } from './notification';
+import { TimerNotification } from './lib/notification';
 
 class Timer {
   constructor(hh, mm, ss) {
