@@ -5,11 +5,11 @@ import { UpArrow } from './shapes/up-arrow';
 import { DownArrow } from './shapes/down-arrow';
 import { shapes, Numbers } from './numbers';
 import { TimerNotification } from './lib/notification';
+import { TimerSound } from './lib/sound';
 
 class Timer {
   constructor(hh, mm, ss) {
     this.events = {};
-    this.sound = new Audio('./assets/foghorn-daniel_simon.mp3');
     this.interval;
     this.animate = false;
 
@@ -33,6 +33,8 @@ class Timer {
   init() {
     const notification = new TimerNotification(this);
     notification.init();
+    const sound = new TimerSound(this);
+    sound.init();
     this.canvas.onclick = this.handleClick.bind(this);
     this.showTime();
     this.render();
@@ -160,7 +162,6 @@ class Timer {
   clockTick() {
     if (this.currentTime <= 0) {
       this.pause();
-      this.sound.play();
       this.trigger('finish');
       return;
     }
