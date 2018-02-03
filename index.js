@@ -4,9 +4,11 @@ import { ResetControl } from './shapes/reset';
 import { UpArrow } from './shapes/up-arrow';
 import { DownArrow } from './shapes/down-arrow';
 import { shapes, Numbers } from './numbers';
+import { TimerNotification } from './notification';
 
 class Timer {
   constructor(hh, mm, ss) {
+    this.events = {};
     this.sound = new Audio('./assets/foghorn-daniel_simon.mp3');
     this.interval;
     this.animate = false;
@@ -29,6 +31,8 @@ class Timer {
   }
 
   init() {
+    const notification = new TimerNotification(this);
+    notification.init();
     this.canvas.onclick = this.handleClick.bind(this);
     this.showTime();
     this.render();
@@ -156,7 +160,8 @@ class Timer {
   clockTick() {
     if (this.currentTime <= 0) {
       this.pause();
-      this.sound.play();
+      //this.sound.play();
+      this.trigger('finish');
       return;
     }
     this.currentTime -= 1;
@@ -183,6 +188,20 @@ class Timer {
     this.drawCircle();
     this.showTime();
     this.drawControls();
+  }
+
+  on(event, cb) {
+    if (this.events.hasOwnProperty(event)) {
+      this.events[event].push(cb);
+    } else {
+      this.events[event] = [cb];
+    }
+  }
+
+  trigger(event, payload) {
+    if (this.events.hasOwnProperty(event) && this.events[event].length > 0) {
+      this.events[event].forEach(cb => cb(payload));
+    }
   }
 }
 
